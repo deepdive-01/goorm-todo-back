@@ -16,26 +16,18 @@ public class FriendCalendarResponseDto {
     @JsonProperty("friend_nickname")
     private final String friendNickname;
 
-    @JsonProperty("month")
-    private final String month;
-
     @JsonProperty("todos")
     private final List<TodoDto> todos;
 
     public FriendCalendarResponseDto(Long friendId, String friendNickname,
-                                     String month, List<Todo> todos) {
+                                     List<Todo> todos) {
         this.friendId = friendId;
         this.friendNickname = friendNickname;
-        this.month = month;
         this.todos = todos.stream()
                 .map(TodoDto::from)
                 .toList();
     }
 
-    /**
-     * 캘린더에서 보여줄 Todo 정보
-     * 내부 정적 클래스로 정의해서 FriendCalendarResponseDto 안에서만 사용
-     */
     @Getter
     public static class TodoDto {
 
