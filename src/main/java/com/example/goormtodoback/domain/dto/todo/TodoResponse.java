@@ -14,6 +14,8 @@ public class TodoResponse {
     private LocalDate specificDate;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String category;
+    private String memo;
     private LocalDateTime createdAt;
 
     public TodoResponse(Todo todo) {
@@ -24,6 +26,8 @@ public class TodoResponse {
         this.specificDate = todo.getSpecificDate();
         this.startDate = todo.getStartDate();
         this.endDate = todo.getEndDate();
+        this.category = todo.getCategory();
+        this.memo = todo.getMemo();
         this.createdAt = todo.getCreatedAt();
     }
 
@@ -35,5 +39,7 @@ public class TodoResponse {
     public LocalDate getSpecificDate() { return specificDate; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
+    public String getCategory() { return category; }
+    public String getMemo() { return memo; }
     public LocalDateTime getCreatedAt() { return createdAt; }
 }

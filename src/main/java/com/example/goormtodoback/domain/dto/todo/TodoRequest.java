@@ -16,4 +16,6 @@ public class TodoRequest {
     private LocalDate specificDate;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String category;
+    private String memo;
 }

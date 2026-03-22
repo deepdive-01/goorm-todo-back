@@ -104,7 +104,9 @@ class TodoServiceTest {
         User user = createUser();
         Todo todo = createTodo(user);
 
-        TodoRequest request = new TodoRequest("운동하기", null, "specific", LocalDate.of(2025, 3, 20), null, null);
+        // category, memo 추가
+        TodoRequest request = new TodoRequest("운동하기", null, "specific",
+                LocalDate.of(2025, 3, 20), null, null, "FOCUS", "오늘 꼭 하기");
 
         given(userRepository.findByUsername("goorm")).willReturn(Optional.of(user));
         given(todoRepository.save(any(Todo.class))).willReturn(todo);
@@ -123,7 +125,8 @@ class TodoServiceTest {
 
         given(userRepository.findByUsername("goorm")).willReturn(Optional.of(user));
 
-        TodoRequest request = new TodoRequest("운동하기", null, "invalid", null, null, null);
+        TodoRequest request = new TodoRequest("운동하기", null, "invalid",
+                null, null, null, null, null);
 
         assertThatThrownBy(() -> todoService.createTodo("goorm", request))
                 .isInstanceOf(CustomException.class)
@@ -136,15 +139,16 @@ class TodoServiceTest {
         User user = createUser();
         Todo todo = createTodo(user);
 
-        TodoRequest request = new TodoRequest("운동하기 (수정)", true, null, null, null, null);
+        TodoRequest request = new TodoRequest("운동하기 (수정)", true, null, null, null, null, null, null);
 
         given(userRepository.findByUsername("goorm")).willReturn(Optional.of(user));
         given(todoRepository.findByIdAndUser(1L, user)).willReturn(Optional.of(todo));
 
-        TodoResponse result = todoService.updateTodo("goorm", 1L, request);
+        todoService.updateTodo("goorm", 1L, request);
 
-        assertThat(result.getTitle()).isEqualTo("운동하기 (수정)");
-        assertThat(result.getIsCompleted()).isTrue();
+        // update 메서드가 실제로 호출됐는지 확인
+        assertThat(todo.getTitle()).isEqualTo("운동하기 (수정)");
+        assertThat(todo.isCompleted()).isTrue();
     }
 
     @Test
@@ -155,7 +159,7 @@ class TodoServiceTest {
         given(userRepository.findByUsername("goorm")).willReturn(Optional.of(user));
         given(todoRepository.findByIdAndUser(999L, user)).willReturn(Optional.empty());
 
-        TodoRequest request = new TodoRequest("수정", null, null, null, null, null);
+        TodoRequest request = new TodoRequest("수정", null, null, null, null, null, null, null);
 
         assertThatThrownBy(() -> todoService.updateTodo("goorm", 999L, request))
                 .isInstanceOf(CustomException.class)
