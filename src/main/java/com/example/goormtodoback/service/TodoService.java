@@ -76,6 +76,8 @@ public class TodoService {
                 .specificDate(request.getSpecificDate())
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
+                .category(request.getCategory())
+                .memo(request.getMemo())
                 .build();
 
         todoRepository.save(todo);
@@ -97,7 +99,9 @@ public class TodoService {
                 request.getDateType(),
                 request.getSpecificDate(),
                 request.getStartDate(),
-                request.getEndDate()
+                request.getEndDate(),
+                request.getCategory(),
+                request.getMemo()
         );
 
         return new TodoResponse(todo);

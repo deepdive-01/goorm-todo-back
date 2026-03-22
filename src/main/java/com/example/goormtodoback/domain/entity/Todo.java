@@ -39,12 +39,18 @@ public class Todo {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "category", length = 10)
+    private String category;  // "FOCUS", "PLAN", "QUICK", "DROP"
+
+    @Column(name = "memo", columnDefinition = "TEXT")
+    private String memo;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Builder
     public Todo(User user, String title, String dateType,
-                LocalDate specificDate, LocalDate startDate, LocalDate endDate) {
+                LocalDate specificDate, LocalDate startDate, LocalDate endDate, String category, String memo) {
         this.user = user;
         this.title = title;
         this.isCompleted = false;
@@ -52,11 +58,13 @@ public class Todo {
         this.specificDate = specificDate;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.category = category;
+        this.memo = memo;
         this.createdAt = LocalDateTime.now();
     }
 
     public void update(String title, Boolean isCompleted, String dateType,
-                       LocalDate specificDate, LocalDate startDate, LocalDate endDate) {
+                       LocalDate specificDate, LocalDate startDate, LocalDate endDate, String category, String memo) {
         if (title != null) this.title = title;
         if (isCompleted != null) this.isCompleted = isCompleted;
         if (dateType != null) {
@@ -65,5 +73,7 @@ public class Todo {
             this.startDate = startDate;
             this.endDate = endDate;
         }
+        if (category != null) this.category = category;
+        if (memo != null) this.memo = memo;
     }
 }
