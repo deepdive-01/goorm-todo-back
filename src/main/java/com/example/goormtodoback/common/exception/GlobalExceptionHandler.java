@@ -3,6 +3,7 @@ package com.example.goormtodoback.common.exception;
 import com.example.goormtodoback.common.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -34,6 +35,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(400)
                 .body(ApiResponse.fail(400, "INVALID_INPUT", message));
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMissingParam(
+            MissingServletRequestParameterException e) {
+        return ResponseEntity
+                .status(400)
+                .body(ApiResponse.fail(400, "INVALID_INPUT", "필수 파라미터가 누락되었습니다."));
     }
 
     // 나머지 예외 처리
