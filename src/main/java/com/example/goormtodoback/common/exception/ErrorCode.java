@@ -29,7 +29,10 @@ public enum ErrorCode {
     SELF_REQUEST(400, "SELF_REQUEST", "자기 자신에게 친구 요청을 보낼 수 없습니다."),
     NOT_FRIEND(403, "NOT_FRIEND", "친구 관계가 아닙니다."),
     INVALID_STATUS(400, "INVALID_STATUS", "유효하지 않은 상태값입니다."),
-    FRIEND_NOT_FOUND(404, "FRIEND_NOT_FOUND", "친구 관계를 찾을 수 없습니다.");
+    FRIEND_NOT_FOUND(404, "FRIEND_NOT_FOUND", "친구 관계를 찾을 수 없습니다."),
+
+    // 명언
+    QUOTE_NOT_FOUND(404, "QUOTE_NOT_FOUND", "명언이 없습니다.");
 
     private final int status;
     private final String code;
