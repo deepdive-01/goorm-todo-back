@@ -46,6 +46,7 @@ public class SecurityConfig {
                         // 인증 없이 허용할 경로
                         .requestMatchers(
                                 "/api/v1/auth/**",  // 로그인, 회원가입
+                                "/api/v1/quotes/**", // 명언 조회의 경우 로그인 없이 허용
                                 "/swagger-ui/**",   // Swagger
                                 "/v3/api-docs/**"   // Swagger
                         ).permitAll()
