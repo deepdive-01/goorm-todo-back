@@ -20,7 +20,8 @@ public class CorsConfig {
 
         // 허용할 주소
         config.setAllowedOrigins(List.of(
-                "http://localhost:5173"   // 로컬 개발 (Vite 기본 포트)
+                "http://localhost:5173",   // 로컬 개발 (Vite 기본 포트)
+                "https://main.d29he1elcp9cy4.amplifyapp.com" // Amplify 배포 주소
         ));
 
         // 허용할 HTTP 메서드
